@@ -1,4 +1,5 @@
 using DevBlog.Api.Models;
+using DevBlog.Api.Services;
 
 namespace DevBlog.Api.Data;
 
@@ -59,6 +60,11 @@ public static class DataSeeder
                 AuthorId = admin.Id
             }
         };
+
+        foreach (var post in posts)
+        {
+            post.ReadingInMinutes = ReadingTimeEstimator.EstimateMinutes(post.Content);
+        }
 
         db.Posts.AddRange(posts);
         db.SaveChanges();

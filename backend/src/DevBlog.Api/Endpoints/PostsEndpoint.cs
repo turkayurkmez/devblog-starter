@@ -37,6 +37,7 @@ public static class PostsEndpoint
                     p.Slug,
                     p.Tags,
                     p.PublishedAt,
+                    p.ReadingInMinutes,
                     Author = p.Author.Username,
                     Comments = p.Comments.OrderBy(c => c.CreatedAt).Select(c => new
                     {

@@ -27,7 +27,7 @@ public class PostRepository(AppDbContext db) : Repository<Post>(db), IPostReposi
         var items = await query
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
-            .Select(p => new PostListItem(p.Id, p.Title, p.Slug, p.Tags, p.PublishedAt, p.Author.Username))
+            .Select(p => new PostListItem(p.Id, p.Title, p.Slug, p.Tags, p.PublishedAt, p.ReadingInMinutes, p.Author.Username))
             .ToListAsync();
 
         return new PagedResult<PostListItem>(items, page, pageSize, totalCount, (int)Math.Ceiling(totalCount / (double)pageSize));

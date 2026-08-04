@@ -20,6 +20,7 @@ public class PostService(IPostRepository postRepository) : IPostService
             Slug = request.Slug,
             Tags = request.Tags,
             PublishedAt = DateTime.UtcNow,
+            ReadingInMinutes = ReadingTimeEstimator.EstimateMinutes(request.Content),
             AuthorId = authorId
         };
 
