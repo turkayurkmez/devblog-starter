@@ -12,7 +12,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Post>()
-            .HasIndex(p => p.Slug);
+            .HasIndex(p => p.Slug)
+            .IsUnique();
 
         modelBuilder.Entity<Post>()
             .HasOne(p => p.Author)

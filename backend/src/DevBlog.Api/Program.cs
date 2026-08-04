@@ -1,6 +1,8 @@
 using System.Text;
 using DevBlog.Api.Data;
 using DevBlog.Api.Endpoints;
+using DevBlog.Api.Repositories;
+using DevBlog.Api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -38,9 +40,13 @@ builder.Services.AddAuthorization();
 // 5. OpenAPI
 builder.Services.AddOpenApi();
 
+// 6. Repositories & Services
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IPostService, PostService>();
+
 var app = builder.Build();
 
-// 6. Apply migrations and seed
+// 7. Apply migrations and seed
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();

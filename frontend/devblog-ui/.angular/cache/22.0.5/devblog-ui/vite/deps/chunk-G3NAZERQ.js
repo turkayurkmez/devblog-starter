@@ -1,16 +1,16 @@
 import {
-  withHttpTransferCache
-} from "./chunk-LJJXUO6I.js";
-import {
   CommonModule,
   PLATFORM_BROWSER_ID
-} from "./chunk-FCPFHYGU.js";
+} from "./chunk-GBAWQDKZ.js";
+import {
+  withHttpTransferCache
+} from "./chunk-UFFBUJ2N.js";
 import {
   DomAdapter,
   getDOM,
   parseCookieValue,
   setRootDomAdapter
-} from "./chunk-LH22UURG.js";
+} from "./chunk-XEKQIAM3.js";
 import {
   APP_BOOTSTRAP_LISTENER,
   APP_ID,
@@ -1564,4 +1564,4 @@ export {
   DomSanitizerImpl,
   VERSION
 };
-//# sourceMappingURL=chunk-BGW6CHJI.js.map
+//# sourceMappingURL=chunk-G3NAZERQ.js.map
