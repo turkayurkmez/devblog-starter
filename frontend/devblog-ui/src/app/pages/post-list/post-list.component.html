@@ -9,3 +9,9 @@
     </li>
   }
 </ul>
+
+<div>
+  <button (click)="goToPage(page - 1)" [disabled]="page <= 1">Önceki</button>
+  <span> Sayfa {{ page }} / {{ totalPages }} </span>
+  <button (click)="goToPage(page + 1)" [disabled]="page >= totalPages">Sonraki</button>
+</div>

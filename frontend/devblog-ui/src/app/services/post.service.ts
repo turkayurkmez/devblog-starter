@@ -23,12 +23,22 @@ export interface Comment {
   createdAt: string;
 }
 
+export interface PagedResult<T> {
+  items: T[];
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PostService {
   private http = inject(HttpClient);
 
-  getPosts() {
-    return this.http.get<PostSummary[]>(`${environment.apiUrl}/posts`);
+  getPosts(page = 1, pageSize = 10) {
+    return this.http.get<PagedResult<PostSummary>>(`${environment.apiUrl}/posts`, {
+      params: { page, pageSize }
+    });
   }
 
   getPost(slug: string) {
