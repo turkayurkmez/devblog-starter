@@ -1,26 +1,39 @@
-<h1>Posts</h1>
-<ul>
-  @for (post of posts; track post.id) {
-    <li>
-      <a [routerLink]="['/posts', post.slug]">{{ post.title }}</a>
-      <small> — {{ post.author }} | {{ post.publishedAt | date:'mediumDate' }}</small>
-      <button
-        type="button"
-        class="like-button"
-        [class.liked]="post.isLikedByCurrentUser"
-        [disabled]="!isLoggedIn"
-        [title]="isLoggedIn ? (post.isLikedByCurrentUser ? 'Beğeniyi geri al' : 'Beğen') : 'Beğenmek için giriş yapmalısınız'"
-        (click)="toggleLike(post)">
-        {{ post.isLikedByCurrentUser ? '♥' : '♡' }} {{ post.likeCount }}
-      </button>
-      <br>
-      <em>{{ post.tags }}</em>
-    </li>
-  }
-</ul>
+<h1 class="mb-4">Posts</h1>
 
-<div>
-  <button (click)="goToPage(page - 1)" [disabled]="page <= 1">Önceki</button>
-  <span> Sayfa {{ page }} / {{ totalPages }} </span>
-  <button (click)="goToPage(page + 1)" [disabled]="page >= totalPages">Sonraki</button>
+<div class="list-group mb-4">
+  @for (post of posts; track post.id) {
+    <div class="list-group-item">
+      <div class="d-flex justify-content-between align-items-start gap-3">
+        <div>
+          <a [routerLink]="['/posts', post.slug]" class="h5 text-decoration-none d-block">{{ post.title }}</a>
+          <div class="text-muted small">{{ post.author }} | {{ post.publishedAt | date:'mediumDate' }}</div>
+          <em class="text-muted small">{{ post.tags }}</em>
+        </div>
+        <button
+          type="button"
+          class="btn btn-sm flex-shrink-0"
+          [class.btn-outline-danger]="!post.isLikedByCurrentUser"
+          [class.btn-danger]="post.isLikedByCurrentUser"
+          [disabled]="!isLoggedIn"
+          [title]="isLoggedIn ? (post.isLikedByCurrentUser ? 'Beğeniyi geri al' : 'Beğen') : 'Beğenmek için giriş yapmalısınız'"
+          (click)="toggleLike(post)">
+          {{ post.isLikedByCurrentUser ? '♥' : '♡' }} {{ post.likeCount }}
+        </button>
+      </div>
+    </div>
+  }
 </div>
+
+<nav aria-label="Post pagination">
+  <ul class="pagination">
+    <li class="page-item" [class.disabled]="page <= 1">
+      <button class="page-link" (click)="goToPage(page - 1)" [disabled]="page <= 1">Önceki</button>
+    </li>
+    <li class="page-item disabled">
+      <span class="page-link">Sayfa {{ page }} / {{ totalPages }}</span>
+    </li>
+    <li class="page-item" [class.disabled]="page >= totalPages">
+      <button class="page-link" (click)="goToPage(page + 1)" [disabled]="page >= totalPages">Sonraki</button>
+    </li>
+  </ul>
+</nav>

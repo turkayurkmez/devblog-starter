@@ -1,13 +1,16 @@
 @if (post) {
-  <article>
+  <article class="mb-4">
     <h1>{{ post.title }}</h1>
-    <p><strong>{{ post.author }}</strong> | {{ post.publishedAt | date:'mediumDate' }} | {{ post.tags }}</p>
-    <div>{{ post.content }}</div>
+    <p class="text-muted">
+      <strong>{{ post.author }}</strong> | {{ post.publishedAt | date:'mediumDate' }} | <em>{{ post.tags }}</em>
+    </p>
+    <div class="mb-3">{{ post.content }}</div>
 
     <button
       type="button"
-      class="like-button"
-      [class.liked]="post.isLikedByCurrentUser"
+      class="btn btn-sm"
+      [class.btn-outline-danger]="!post.isLikedByCurrentUser"
+      [class.btn-danger]="post.isLikedByCurrentUser"
       [disabled]="!isLoggedIn"
       [title]="isLoggedIn ? (post.isLikedByCurrentUser ? 'Beğeniyi geri al' : 'Beğen') : 'Beğenmek için giriş yapmalısınız'"
       (click)="toggleLike()">
@@ -18,20 +21,31 @@
   <section>
     <h2>Comments</h2>
     @for (c of post.comments; track c.id) {
-      <div>
-        <strong>{{ c.authorName }}</strong> <small>{{ c.createdAt | date:'short' }}</small>
-        <p>{{ c.body }}</p>
+      <div class="card mb-2">
+        <div class="card-body py-2">
+          <div class="d-flex justify-content-between">
+            <strong>{{ c.authorName }}</strong>
+            <small class="text-muted">{{ c.createdAt | date:'short' }}</small>
+          </div>
+          <p class="mb-0">{{ c.body }}</p>
+        </div>
       </div>
     }
 
-    <h3>Add a comment</h3>
+    <h3 class="mt-4">Add a comment</h3>
     @if (submitted) {
-      <p>Comment submitted!</p>
+      <div class="alert alert-success" role="alert">Comment submitted!</div>
     }
     <form (ngSubmit)="submitComment()">
-      <input [(ngModel)]="commentAuthor" name="author" placeholder="Your name" required>
-      <textarea [(ngModel)]="commentBody" name="body" placeholder="Your comment" required></textarea>
-      <button type="submit">Submit</button>
+      <div class="mb-3">
+        <label for="commentAuthor" class="form-label">Name</label>
+        <input id="commentAuthor" class="form-control" [(ngModel)]="commentAuthor" name="author" placeholder="Your name" required>
+      </div>
+      <div class="mb-3">
+        <label for="commentBody" class="form-label">Comment</label>
+        <textarea id="commentBody" class="form-control" [(ngModel)]="commentBody" name="body" placeholder="Your comment" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </section>
 } @else {
