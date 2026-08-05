@@ -4,6 +4,15 @@
     <li>
       <a [routerLink]="['/posts', post.slug]">{{ post.title }}</a>
       <small> — {{ post.author }} | {{ post.publishedAt | date:'mediumDate' }}</small>
+      <button
+        type="button"
+        class="like-button"
+        [class.liked]="post.isLikedByCurrentUser"
+        [disabled]="!isLoggedIn"
+        [title]="isLoggedIn ? (post.isLikedByCurrentUser ? 'Beğeniyi geri al' : 'Beğen') : 'Beğenmek için giriş yapmalısınız'"
+        (click)="toggleLike(post)">
+        {{ post.isLikedByCurrentUser ? '♥' : '♡' }} {{ post.likeCount }}
+      </button>
       <br>
       <em>{{ post.tags }}</em>
     </li>

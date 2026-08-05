@@ -8,12 +8,20 @@ export interface PostSummary {
   slug: string;
   tags: string;
   publishedAt: string;
+  readingInMinutes: number;
   author: string;
+  likeCount: number;
+  isLikedByCurrentUser: boolean;
 }
 
 export interface PostDetail extends PostSummary {
   content: string;
   comments: Comment[];
+}
+
+export interface LikeResult {
+  likeCount: number;
+  isLikedByCurrentUser: boolean;
 }
 
 export interface Comment {
@@ -51,5 +59,9 @@ export class PostService {
 
   addComment(slug: string, data: { authorName: string; body: string }) {
     return this.http.post(`${environment.apiUrl}/posts/${slug}/comments`, data);
+  }
+
+  toggleLike(slug: string) {
+    return this.http.post<LikeResult>(`${environment.apiUrl}/posts/${slug}/like`, {});
   }
 }

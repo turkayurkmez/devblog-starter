@@ -12,4 +12,5 @@ public class Post
     public int AuthorId { get; set; }
     public User Author { get; set; } = null!;
     public ICollection<Comment> Comments { get; set; } = [];
+    public ICollection<PostLike> Likes { get; set; } = [];
 }

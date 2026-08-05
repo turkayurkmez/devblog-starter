@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PostService, PostSummary } from '../../services/post.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-post-list',
@@ -12,12 +13,26 @@ import { PostService, PostSummary } from '../../services/post.service';
 export class PostListComponent implements OnInit {
   private postService = inject(PostService);
     private cdr = inject(ChangeDetectorRef);
+  private authService = inject(AuthService);
   posts: PostSummary[] = [];
   page = 1;
   totalPages = 1;
 
   ngOnInit() {
     this.loadPosts();
+  }
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
+  toggleLike(post: PostSummary) {
+    if (!this.isLoggedIn) return;
+    this.postService.toggleLike(post.slug).subscribe(result => {
+      post.likeCount = result.likeCount;
+      post.isLikedByCurrentUser = result.isLikedByCurrentUser;
+      this.cdr.detectChanges();
+    });
   }
 
   loadPosts() {

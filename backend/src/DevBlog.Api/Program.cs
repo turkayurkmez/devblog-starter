@@ -43,6 +43,8 @@ builder.Services.AddOpenApi();
 // 6. Repositories & Services
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddScoped<IPostLikeRepository, PostLikeRepository>();
+builder.Services.AddScoped<IPostLikeService, PostLikeService>();
 
 var app = builder.Build();
 
@@ -64,6 +66,7 @@ if (app.Environment.IsDevelopment())
 }
 
 PostsEndpoint.Map(app);
+PostLikesEndpoint.Map(app);
 CommentsEndpoint.Map(app);
 AuthEndpoint.Map(app);
 

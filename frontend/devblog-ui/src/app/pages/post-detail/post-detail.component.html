@@ -3,6 +3,16 @@
     <h1>{{ post.title }}</h1>
     <p><strong>{{ post.author }}</strong> | {{ post.publishedAt | date:'mediumDate' }} | {{ post.tags }}</p>
     <div>{{ post.content }}</div>
+
+    <button
+      type="button"
+      class="like-button"
+      [class.liked]="post.isLikedByCurrentUser"
+      [disabled]="!isLoggedIn"
+      [title]="isLoggedIn ? (post.isLikedByCurrentUser ? 'Beğeniyi geri al' : 'Beğen') : 'Beğenmek için giriş yapmalısınız'"
+      (click)="toggleLike()">
+      {{ post.isLikedByCurrentUser ? '♥' : '♡' }} {{ post.likeCount }}
+    </button>
   </article>
 
   <section>

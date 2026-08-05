@@ -30,12 +30,15 @@ public class PostService(IPostRepository postRepository) : IPostService
         return new CreatePostResult(true, null, post);
     }
 
-    public Task<PagedResult<PostListItem>> GetPostsAsync(int page, int pageSize, string? tag)
+    public Task<PagedResult<PostListItem>> GetPostsAsync(int page, int pageSize, string? tag, int? currentUserId)
     {
         page = Math.Max(page, 1);
         pageSize = Math.Clamp(pageSize, 1, 100);
         var normalizedTag = string.IsNullOrWhiteSpace(tag) ? null : tag.Trim();
 
-        return postRepository.GetPagedAsync(page, pageSize, normalizedTag);
+        return postRepository.GetPagedAsync(page, pageSize, normalizedTag, currentUserId);
     }
+
+    public Task<PostDetail?> GetPostBySlugAsync(string slug, int? currentUserId) =>
+        postRepository.GetDetailBySlugAsync(slug, currentUserId);
 }
