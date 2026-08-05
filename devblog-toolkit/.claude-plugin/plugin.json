@@ -1,0 +1,10 @@
+{
+  "name": "devblog-toolkit",
+  "version": "0.1.0",
+  "description": "DevBlog reposuna (DevBlog.Api + devblog-ui) ozgu skill, command ve agent'lari bir araya getiren Claude Code plugin'i.",
+  "author": {
+    "name": "turkay urkmez",
+    "email": "turkay.urkmez@gmail.com"
+  },
+  "keywords": ["devblog", "dotnet", "angular", "ef-core", "security", "seo"]
+}

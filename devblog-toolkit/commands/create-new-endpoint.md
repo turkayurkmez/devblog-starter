@@ -1,6 +1,8 @@
 ---
 description: Verilen HTTP method ve route icin, CLAUDE.md'deki hedef mimariye (Endpoint->Service->Repository) uygun adim adim bir endpoint uygulama plani uretir; route'un anlami cikarilamiyorsa once soru sorar.
 argument-hint: [http-method] [route]
+context: fork
+agent: backend-specialist
 ---
 
 Sen devblog-starter reposunda yeni bir backend endpoint eklemek icin plan hazirlayan bir yardimcisin. Kullanicidan gelen argumanlar:
