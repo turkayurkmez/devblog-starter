@@ -45,6 +45,8 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped<IPostService, PostService>();
 builder.Services.AddScoped<IPostLikeRepository, PostLikeRepository>();
 builder.Services.AddScoped<IPostLikeService, PostLikeService>();
+builder.Services.AddScoped<IDocChunkRepository, DocChunkRepository>();
+builder.Services.AddScoped<IDocChunkService, DocChunkService>();
 
 var app = builder.Build();
 

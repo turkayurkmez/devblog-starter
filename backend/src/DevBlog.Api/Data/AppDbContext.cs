@@ -9,6 +9,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
     public DbSet<Post> Posts => Set<Post>();
     public DbSet<Comment> Comments => Set<Comment>();
     public DbSet<PostLike> PostLikes => Set<PostLike>();
+    public DbSet<DocChunk> DocChunks => Set<DocChunk>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
